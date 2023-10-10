@@ -12,7 +12,9 @@
  */
 function printArrayValues(array) {
   // YOUR CODE BELOW HERE //
-  
+  for (var i = 0; i < array.length; i++) {
+    console.log(array[i]);
+  }
   
   
   
@@ -25,7 +27,9 @@ function printArrayValues(array) {
  */
 function printArrayValuesInReverse(array) {
   // YOUR CODE BELOW HERE //
-  
+  for (var i = array.length - 1; i >= 0; i--) {
+    console.log(array[i]);
+  }
   
   
   
@@ -37,7 +41,11 @@ function printArrayValuesInReverse(array) {
  */
 function getObjectKeys(object) {
   // YOUR CODE BELOW HERE //
-  
+  var keyArray = [];
+  for (var key in object) {
+    keyArray.push(key)
+  }
+  return keyArray;
   
   
   
@@ -50,7 +58,9 @@ function getObjectKeys(object) {
  */
 function printObjectKeys(object) {
   // YOUR CODE BELOW HERE //
-  
+  for (var key in object) {
+    console.log(key);
+  }
   
   
   
@@ -62,8 +72,11 @@ function printObjectKeys(object) {
  */
 function getObjectValues(object) {
   // YOUR CODE BELOW HERE //
-  
-  
+  var objectValues = [];
+  for (var key in object) {
+    objectValues.push(object[key]);
+  }
+  return objectValues
   
   
   // YOUR CODE ABOVE HERE //
@@ -75,7 +88,9 @@ function getObjectValues(object) {
  */
 function printObjectValues(object) {
   // YOUR CODE BELOW HERE //
-  
+  for (var key in object) {
+    console.log(object[key]);
+  }
   
   
   
@@ -87,8 +102,15 @@ function printObjectValues(object) {
  */
 function getObjectLength(object) {
   // YOUR CODE BELOW HERE //
-  
-  
+  var keyValuePairs = [];
+  for (var key in object) {
+    keyValuePairs.push(key);
+  }
+
+  var numOfPairs = keyValuePairs.length;
+
+  return numOfPairs;
+
   
   
   // YOUR CODE ABOVE HERE //
@@ -100,7 +122,14 @@ function getObjectLength(object) {
  */
 function printObjectValuesInReverse(object) {
   // YOUR CODE BELOW HERE //
-  
+  var reversedObj = [];
+  for (var key in object) {
+    reversedObj.unshift(object[key]);
+
+    for (var i = 0; i < reversedObj.length; i++) {
+      console.log(reversedObj[i])
+    }
+  }
   
   
   
