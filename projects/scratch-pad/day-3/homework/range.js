@@ -33,8 +33,8 @@ function range(start, end) {
         }
 
     } else if (start > end) {
-        var num = end;
-        while (num >= start) {
+        var num = start;
+        while (num >= end) {
             outputArray.push(num);
             num--;
         }

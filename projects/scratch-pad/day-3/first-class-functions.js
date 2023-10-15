@@ -14,13 +14,14 @@
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
     return function(base, secondValue) {
-        if (base < secondValue) {
-            return true;
-        } else if (base === secondValue) {
-            return 'equal';
-        } else {
-            return false;
-        }
+        // if (base < secondValue) {
+        //     return true;
+        // } else if (base === secondValue) {
+        //     return 'equal';
+        // } else {
+        //     return false;
+        // }
+        return base < secondValue;
     }
     
     
