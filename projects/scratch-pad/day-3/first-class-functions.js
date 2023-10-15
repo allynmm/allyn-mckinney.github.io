@@ -13,7 +13,7 @@
  */
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    return function(base, secondValue) {
+    return function(testValue) {
         // if (base < secondValue) {
         //     return true;
         // } else if (base === secondValue) {
@@ -21,7 +21,7 @@ function createGreaterThanFilter(base) {
         // } else {
         //     return false;
         // }
-        return base < secondValue;
+        return base < testValue;
     }
     
     
@@ -36,8 +36,8 @@ function createGreaterThanFilter(base) {
  */
 function createLessThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    return function(base, secondValue) {
-        return base < secondValue;
+    return function(testValue) {
+        return base > testValue;
     }
     
     
@@ -52,8 +52,9 @@ function createLessThanFilter(base) {
  */
 function createStartsWithFilter(startsWith) {
     // YOUR CODE BELOW HERE //
-    return function(startsWith, string) {
-        return string[0] === startsWith;
+    return function(string) {
+        
+        return string[0].toLowerCase() === startsWith.toLowerCase();
     }
     
     
@@ -68,8 +69,8 @@ function createStartsWithFilter(startsWith) {
  */
 function createEndsWithFilter(endsWith) {
     // YOUR CODE BELOW HERE //
-    return function (endsWith, string) {
-        return string[string.length - 1] === endsWith;
+    return function (string) {
+        return string[string.length - 1].toLowerCase() === endsWith.toLowerCase();
     }
     
     
@@ -86,8 +87,14 @@ function createEndsWithFilter(endsWith) {
  */
 function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
+    var output = [];
+    for (var i = 0; i < strings.length; i++) {
+        if (modify(strings[i])) {
+            output.push(strings[i]);
+        }
+    }
     
-    
+    return output;
     
     
     // YOUR CODE ABOVE HERE //
@@ -104,7 +111,18 @@ function modifyStrings(strings, modify) {
  */
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
-    
+    var testArray = [];
+    for (var i = 0; i < string.length; i++) {
+        if (test(strings[i]) === true) {
+            testArray.push(strings[i])
+            if (testArray === strings) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
     
     
     
