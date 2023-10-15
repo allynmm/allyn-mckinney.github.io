@@ -13,7 +13,15 @@
  */
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+    return function(base, secondValue) {
+        if (base < secondValue) {
+            return true;
+        } else if (base === secondValue) {
+            return 'equal';
+        } else {
+            return false;
+        }
+    }
     
     
     
@@ -27,7 +35,9 @@ function createGreaterThanFilter(base) {
  */
 function createLessThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+    return function(base, secondValue) {
+        return base < secondValue;
+    }
     
     
     
@@ -41,7 +51,9 @@ function createLessThanFilter(base) {
  */
 function createStartsWithFilter(startsWith) {
     // YOUR CODE BELOW HERE //
-    
+    return function(startsWith, string) {
+        return string[0] === startsWith;
+    }
     
     
     
@@ -55,7 +67,9 @@ function createStartsWithFilter(startsWith) {
  */
 function createEndsWithFilter(endsWith) {
     // YOUR CODE BELOW HERE //
-    
+    return function (endsWith, string) {
+        return string[string.length - 1] === endsWith;
+    }
     
     
     

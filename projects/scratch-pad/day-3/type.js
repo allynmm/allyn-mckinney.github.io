@@ -14,7 +14,13 @@
  */
 function isArray(value) {
     // YOUR CODE BELOW HERE //
-    
+    // var valuetype = typeof value;
+
+    if (Array.isArray(value) == true) {
+        return true;
+    } else {
+        return false;
+    }
     
     
     
@@ -31,6 +37,13 @@ function isArray(value) {
  */
 function isObject(value) {
     // YOUR CODE BELOW HERE //
+    var valueType = typeof value;
+
+    if (value !== null && valueType === 'object' && Array.isArray(value) != true && value instanceof Date != true) {
+        return true
+    } else {
+        return false;
+    }
     
     
     
@@ -46,7 +59,14 @@ function isObject(value) {
  */
 function isCollection(value) {
     // YOUR CODE BELOW HERE //
-    
+var valueType = typeof value;
+
+if (valueType === 'object' && value instanceof Date != true && value !== null) {
+    return true
+} else {
+    return false
+}
+
     
     
     
@@ -74,7 +94,29 @@ function isCollection(value) {
  */ 
 function typeOf(value) {
     // YOUR CODE BELOW HERE //
+    var answer = typeof value;
     
+    if (answer === 'object' && value instanceof Date != true && value !== null) {
+        if (Array.isArray(value) === true) {
+            answer = 'array';
+        } else {
+            answer = 'object'
+        }
+     } else if (value === null) {
+        answer = 'null';
+    } else if (answer === 'string') {
+        answer = 'string'
+    } else if (answer === 'number') {
+        answer = 'number';
+    } else if (answer === 'boolean') {
+        answer = 'boolean';
+    } else if (answer === 'function') {
+        answer = 'function';
+    } else if (value instanceof Date === true) {
+        answer = 'date'
+    }
+
+    return answer;
     
     
     

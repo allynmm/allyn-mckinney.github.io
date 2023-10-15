@@ -23,7 +23,27 @@
  */
 function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
-    
+    var outputArray = [];
+
+    if (start < end) {
+        var num = start;
+        while (num <= end) {
+            outputArray.push(num);
+            num++;
+        }
+
+    } else if (start > end) {
+        var num = end;
+        while (num >= start) {
+            outputArray.push(num);
+            num--;
+        }
+    } else {
+        outputArray.push(start);
+    }
+
+    return outputArray;
+
     
     
     
