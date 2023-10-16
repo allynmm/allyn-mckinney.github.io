@@ -60,19 +60,38 @@ function makeContactList() {
             return contacts.push(contact);
         },
         findContact: function(fullName) {
-            // for (var i = 0; i < contacts.length; i++) {
-            //     contacts[i];
-            // }
-            // var firstAndLast = fullName.split(' ');
-            return undefined;
+            var nameSearch = fullName.split(' ');
+
+            for (var i = 0; i < contacts.length; i++) {
+
+                if (nameSearch[0] === contacts[i].nameFirst && nameSearch[1] === contacts[i].nameLast) {
+                    return contacts[i];
+                } 
+            }
+            return undefined
         },
         removeContact: function(contact) {
-            // for (var i = 0; i < contacts.length; i++) {
-            //     if (contacts[i] === contact) {
-            //         delete contact;
-            //     }
+            for (var i = 0; i < contacts.length; i++) {
+                if (contacts[i].id === contact.id) {
+                    contacts.splice(contacts[i], 1);
+                }
                 return contacts;
-            // }
+            }
+        },
+        printAllContactNames() {
+            var output = '';
+            for (var i = 0; i < contacts.length; i++) {
+                // output += contacts[i] + '\n';
+                if (i < contacts.length - 1) {
+                    output += contacts[i].nameFirst + ' ' + contacts[i].nameLast + '\n';
+                } else if (i === contacts.length - 1) {
+                    output += contacts[i].nameFirst + ' ' + contacts[i].nameLast;
+                }
+            }
+
+            return output;
+
+        
         }
     }
 }

@@ -89,9 +89,9 @@ function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
     var output = [];
     for (var i = 0; i < strings.length; i++) {
-        if (modify(strings[i])) {
-            output.push(strings[i]);
-        }
+        modify(strings[i]);
+        output.push(strings[i]);
+        
     }
     
     return output;
@@ -112,7 +112,7 @@ function modifyStrings(strings, modify) {
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
     var testArray = [];
-    for (var i = 0; i < string.length; i++) {
+    for (var i = 0; i < strings.length; i++) {
         if (test(strings[i]) === true) {
             testArray.push(strings[i])
             if (testArray === strings) {
