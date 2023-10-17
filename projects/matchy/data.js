@@ -98,7 +98,7 @@ var friends = [];
 //since friends are in a list, i chose the data structure that mosst accurately is formatted like a list.
 
 function getRandom(array) {
-  let x = Math.random() * array.length - 1;
+  let x = Math.floor(Math.random() * array.length);
   return array[x];
 };
 
