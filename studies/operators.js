@@ -132,9 +132,13 @@
 // UNARY OPERATORS //
 // 1. Logical NOT Operator //
 // The ! operator flips the value of a Boolean
+    console.log(!true); //returns false
 
 // 2. Typeof Operator //
 // The typeof operator returns the general data type of a passed value
+    console.log(typeof a); //returns number
+    console.log(typeof stringConcatenation); // returns string
+    console.log(typeof true); // returns boolean
 
 // 3. Unary Negation Operator //
 // The - operator directly precedes its operand and negates it
@@ -144,6 +148,10 @@
 // The ternay operator is a conditional operator which evaluates either of 2 expressions based on a provided conditional expression
 //                                  SYNTAX => a ? b : c
 //  a = condition,    b = code to run if condition is true,   c = code to run if condition is false
+    function findGreater(a, b) {
+        return a > b ? "a is greater" : "b is greater or equal";
+    }
 
+    console.log(findGreater(a, b)); // returns a is greater
 
 
