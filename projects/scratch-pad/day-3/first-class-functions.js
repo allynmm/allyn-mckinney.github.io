@@ -89,9 +89,8 @@ function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
     var output = [];
     for (var i = 0; i < strings.length; i++) {
-        modify(strings[i]);
-        output.push(strings[i]);
-        
+        var modifiedStrings = modify(strings[i]);
+        output.push(modifiedStrings); 
     }
     
     return output;
@@ -114,18 +113,14 @@ function allStringsPass(strings, test) {
     var testArray = [];
     for (var i = 0; i < strings.length; i++) {
         if (test(strings[i]) === true) {
-            testArray.push(strings[i])
-            if (testArray === strings) {
-                return true;
-            } else {
-                return false;
-            }
+            testArray.push(strings[i]);
         }
-
     }
-    
-    
-    
+    if (testArray.length === strings.length) {
+        return true
+    } else {
+        return false
+    }
     // YOUR CODE ABOVE HERE //
 }
 
