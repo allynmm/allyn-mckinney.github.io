@@ -53,11 +53,12 @@ function remove(array, name) {
 //////////////////////////////////////////////////////////////////////
 function add(array, animal) {
     for (var i = 0; i < array.length; i++) {
-        if(animal.name.length > 0 && animal.name !== array[i].name && animal.species.length > 0) {
+        if(animal.hasOwnProperty('name') && animal.name.length > 0 && animal.name !== array[i].name && animal.hasOwnProperty('species') && animal.species.length > 0) {
             array.push(animal);
+            return array
         }
     }
-    return array
+
 }
 
 
