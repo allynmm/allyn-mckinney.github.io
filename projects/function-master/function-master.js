@@ -87,7 +87,11 @@ function capitalizeAllWords(string) {
 //////////////////////////////////////////////////////////////////////
 
 function welcomeMessage(object) {
-    
+    var userName = object.name;
+    var splitName = userName.split('');
+    splitName.splice(0, 1, splitName[0].toUpperCase());
+    var greetingName = splitName.join('');
+    return "Welcome "  + greetingName + "!";
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -95,7 +99,16 @@ function welcomeMessage(object) {
 //////////////////////////////////////////////////////////////////////
 
 function profileInfo(object) {
+    var objName = object.name;
+    var objSpecies = object.species;
+    var splitName = objName.split('');
+    var splitSpecies = objSpecies.split('');
+    splitName.splice(0, 1, splitName[0].toUpperCase());
+    splitSpecies.splice(0, 1, splitSpecies[0].toUpperCase());
+    var msgName = splitName.join('');
+    var msgSpecies = splitSpecies.join('');
 
+    return "" + msgName + " is a " + msgSpecies;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -103,7 +116,20 @@ function profileInfo(object) {
 //////////////////////////////////////////////////////////////////////
 
 function maybeNoises(object) {
-
+    var output = '';
+    if (Array.isArray(object.noises) && object.noises.length > 0) {
+        var noises = object.noises;
+        for (var i = 0; i < noises.length; i++) {
+            if (i < noises.length - 1) {
+                output += noises[i] + ' ';
+            } else if (i === noises.length - 1) {
+                output += noises[i];
+            }
+        }
+        return output;
+    } else if (!object.hasOwnProperty(noises)) {
+        return 'there are no noises';
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -111,7 +137,15 @@ function maybeNoises(object) {
 //////////////////////////////////////////////////////////////////////
 
 function hasWord(string, word) {
-
+    var arrOfStrings = string.split(' ');
+    for (var i = 0; i < arrOfStrings.length; i++) {
+        var testString = arrOfStrings[i];
+    }
+    if (arrOfStrings[i] === word) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -119,7 +153,8 @@ function hasWord(string, word) {
 //////////////////////////////////////////////////////////////////////
 
 function addFriend (name, object) {
-
+    object.friends.push(name);
+    return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -127,7 +162,11 @@ function addFriend (name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function isFriend(name, object) {
+    for (var i = 0; i < object.friends.length; i++) {
+        if (object.hasOwnProperty('friends') && Array.isArray(object.friends) && object.friends.length > 0) {
 
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -143,7 +182,8 @@ function nonFriends(name, array) {
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-
+    object[key] = value;
+    return object
 }
 
 //////////////////////////////////////////////////////////////////////
