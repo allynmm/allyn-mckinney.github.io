@@ -52,11 +52,19 @@ function remove(array, name) {
 // Step 4 - Add ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 function add(array, animal) {
+    // step 1: iterate through aray to see if animal already exists
+        // how do i keep track of whether i've found a match or not
     for (var i = 0; i < array.length; i++) {
-        if(animal.hasOwnProperty('name') && animal.name.length > 0 && animal.name !== array[i].name && animal.hasOwnProperty('species') && animal.species.length > 0) {
-            array.push(animal);
-            return array
+        if(animal.name === array[i].name) {
+            return false
         }
+    }
+
+    // step 2: if animal doesn't exist, validate data and add
+
+    if(animal.hasOwnProperty('name') && animal.name.length > 0 && animal.hasOwnProperty('species') && animal.species.length > 0) {
+        array.push(animal);
+        return array
     }
 
 }

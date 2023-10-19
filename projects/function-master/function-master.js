@@ -140,12 +140,12 @@ function hasWord(string, word) {
     var arrOfStrings = string.split(' ');
     for (var i = 0; i < arrOfStrings.length; i++) {
         var testString = arrOfStrings[i];
+        if (testString === word) {
+            return true;
+        }
     }
-    if (arrOfStrings[i] === word) {
-        return true;
-    } else {
-        return false;
-    }
+    return false;
+
 }
 
 //////////////////////////////////////////////////////////////////////
