@@ -144,6 +144,7 @@ function hasWord(string, word) {
             return true;
         }
     }
+
     return false;
 
 }
@@ -162,11 +163,20 @@ function addFriend (name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function isFriend(name, object) {
+    // validate object data
+    if (object.hasOwnProperty('friends') !== true && Array.isArray(object.friends) !== true && object.friends.length > 0 !== true) {
+        return false
+    }
+    
+    // iterate through object.friends array to see if name argument exists in object.friends array
+        // exit if name is found in the array  
     for (var i = 0; i < object.friends.length; i++) {
-        if (object.hasOwnProperty('friends') && Array.isArray(object.friends) && object.friends.length > 0) {
-
+        if (name === object.friends[i]) {
+            return true
         }
     }
+
+    return false
 }
 
 //////////////////////////////////////////////////////////////////////
