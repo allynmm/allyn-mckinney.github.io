@@ -164,7 +164,7 @@ function addFriend (name, object) {
 
 function isFriend(name, object) {
     // validate object data
-    if (object.hasOwnProperty('friends') !== true && Array.isArray(object.friends) !== true && object.friends.length > 0 !== true) {
+    if (object.hasOwnProperty('friends') !== true || Array.isArray(object.friends) !== true || object.friends.length > 0 !== true) {
         return false
     }
     
@@ -184,7 +184,15 @@ function isFriend(name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function nonFriends(name, array) {
-
+    var output = [];
+   for (var i = 0; i < array.length; i++) {
+     if (array[i].name !== name) {
+       if (!array[i].friends.includes(name)) {
+         output.push(array[i].name);
+       }
+     }
+   }
+    return output;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -201,7 +209,12 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-
+    for (var i = 0; i < array.length; i++) {
+        if (object.hasOwnProperty(array[i])) {
+            delete object[array[i]];
+        }
+    }
+    
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -209,7 +222,13 @@ function removeProperties(object, array) {
 //////////////////////////////////////////////////////////////////////
 
 function dedup(array) {
-
+    var output = [];
+    for (var i = 0; i < array.length; i++) {
+        if (!output.includes(array[i])) {
+            output.push(array[i]);
+        }
+    }
+    return output;
 }
 
 //////////////////////////////////////////////////////////////////////
