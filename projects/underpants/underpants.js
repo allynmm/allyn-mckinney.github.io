@@ -3,7 +3,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
-var _ = {};
+var _ = {}; // _ => underscore object
 
 
 /**
@@ -20,7 +20,9 @@ var _ = {};
 *   _.identity(5) === 5
 *   _.identity({a: "b"}) === {a: "b"}
 */
-
+_.identity = function(value) {
+    return value;
+}
 
 /** _.typeOf
 * Arguments:
@@ -41,7 +43,9 @@ var _ = {};
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
-
+// _.typeof = function(value) {
+    
+// }
 
 /** _.first
 * Arguments:
@@ -97,6 +101,25 @@ var _ = {};
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 
+_.indexOf = function(array, value) {
+    var output = [];
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] === value) {
+            output.push(i);
+        } else if (!Array.isArray(array)) {
+            return -1;
+        } else if(array[i] !== value) {
+            return -1;
+        }
+    }
+    
+    if (output.length > 1) {
+        return output.join(',');
+    } else {
+        return output.join();
+    }
+}
+
 
 /** _.contains
 * Arguments:
@@ -113,6 +136,12 @@ var _ = {};
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 
+_.contains = function(array, value) {
+    for (var i = 0; i < array.length; i++) {
+        array[i] === value ? true 
+        : !value ? false 
+    }
+}
 
 /** _.each
 * Arguments:
@@ -130,6 +159,18 @@ var _ = {};
 *      -> should log "a" "b" "c" to the console
 */
 
+_.each = function(collection, func) {
+    //if collection is an array
+    if(Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++){
+            func(collection[i], i, collection); //invoking the function on each element in the array
+        }
+    } else { //else its an object
+        for (let key in collection) {
+            func(collection[key], key, collection); // invoking function on each value in the array
+        }
+    }
+}
 
 /** _.unique
 * Arguments:

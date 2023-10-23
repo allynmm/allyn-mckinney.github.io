@@ -5,19 +5,22 @@
 
 function triangles(num) { //num represents number of rows
   var hashtag = '#';
-  var output = '';
+
   for (var i = 1; i <= num; i++) {
-    output += hashtag.repeat(i) + '\n';
+    if (i < num) {
+      console.log(hashtag.repeat(i) + '\n');
+    } else if (i === num) {
+      console.log(hashtag.repeat(i));
+    } 
   }
-  return output;
 }
 ////////////////////////////////////////////////////////////////////////////////
 // fizzBuzz ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function fizzBuzz() {
-  var count = 1;
-  while (count <= 100) {
+function fizzBuzz(start, finish) {
+  var count = start;
+  while (count <= finish) {
    if (count % 3 === 0 && count % 5 === 0) {
     console.log('fizzbuzz');
    } else if (count % 3 === 0) {
@@ -54,7 +57,7 @@ function drawChessboard(x) { //x represents rows and columns
       output += oddRow;
     }
   }
-  return output;
+  console.log(output);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
