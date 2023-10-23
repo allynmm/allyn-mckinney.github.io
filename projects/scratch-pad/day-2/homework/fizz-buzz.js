@@ -26,7 +26,7 @@ function fizzBuzz() {
              console.log(count)
          }
       count++;
-     }
+    }
 
    
 
