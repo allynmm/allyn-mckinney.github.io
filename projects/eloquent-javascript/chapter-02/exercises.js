@@ -4,7 +4,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 function triangles(num) { //num represents number of rows
-
+  var hashtag = '#';
+  var output = '';
+  for (var i = 1; i <= num; i++) {
+    output += hashtag.repeat(i) + '\n';
+  }
+  return output;
 }
 ////////////////////////////////////////////////////////////////////////////////
 // fizzBuzz ////////////////////////////////////////////////////////////////////
@@ -12,28 +17,44 @@ function triangles(num) { //num represents number of rows
 
 function fizzBuzz() {
   var count = 1;
-
-    while (count <= 100) {
- 
-         if (count % 3 === 0 && count % 5 === 0) {
-             console.log('FizzBuzz');
-         } else if (count % 3 === 0) {
-             console.log('Fizz');
-         } else if (count % 5 === 0) {
-             console.log('Buzz');
-         } else {
-             console.log(count)
-         }
-      count++;
-    }
+  while (count <= 100) {
+   if (count % 3 === 0 && count % 5 === 0) {
+    console.log('fizzbuzz');
+   } else if (count % 3 === 0) {
+    console.log('fizz');
+   } else if (count % 5 === 0) {
+    console.log('buzz');
+   } else {
+    console.log(count);
+   }
+   count++;
+  }
 }
-
 ////////////////////////////////////////////////////////////////////////////////
 // drawChessboard //////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 function drawChessboard(x) { //x represents rows and columns
-
+  var oddPiece = '# ';
+  var evenPiece = ' #';
+  var oddRow = oddPiece.repeat(x);
+  var evenRow = evenPiece.repeat(x);
+  var output = '';
+  // use the array to create columns
+  for (var i = 1; i <= x; i++) {
+    //even columns
+    if (i % 2 === 0 && i < x) {
+      output += evenRow + '\n';
+      //odd columns
+    } else if (i % 2 !== 0 && i < x) {
+      output += oddRow + '\n';
+    } else if (i % 2 === 0 && i === x) {
+      output += evenRow;
+    } else if (i % 2 !== 0 && i === x) {
+      output += oddRow;
+    }
+  }
+  return output;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
