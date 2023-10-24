@@ -7,11 +7,7 @@ function triangles(num) { //num represents number of rows
   var hashtag = '#';
 
   for (var i = 1; i <= num; i++) {
-    if (i < num) {
-      console.log(hashtag.repeat(i) + '\n');
-    } else if (i === num) {
       console.log(hashtag.repeat(i));
-    } 
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,8 +34,8 @@ function fizzBuzz(start, finish) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function drawChessboard(x) { //x represents rows and columns
-  var oddPiece = '# ';
-  var evenPiece = ' #';
+  var oddPiece = ' ';
+  var evenPiece = '#';
   var oddRow = oddPiece.repeat(x);
   var evenRow = evenPiece.repeat(x);
   var output = '';
