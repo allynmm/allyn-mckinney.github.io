@@ -34,24 +34,47 @@ function fizzBuzz(start, finish) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function drawChessboard(x) { //x represents rows and columns
-  var oddPiece = ' ';
-  var evenPiece = '#';
-  var oddRow = oddPiece.repeat(x);
-  var evenRow = evenPiece.repeat(x);
+  var oddPiece = '#';
+  var evenPiece = ' ';
+
+  //the first row will start w a space and the following row will start w  a #
+
+  // use a for loop to create an odd row
+  var oddRow = '#';
+  for (var i = 1; i <= x - 1; i++) {
+    if (i % 2 === 0) {
+      oddRow += oddPiece;
+    } else {
+      oddRow += evenPiece;
+    }
+  }
+  // console.log(oddRow);
+  //use another for loop to create an even row
+  var evenRow = " ";
+  for (var a = 1; a <= x - 1; a++) {
+    if (a % 2 === 0) {
+      evenRow += evenPiece;
+    } else {
+      evenRow += oddPiece;
+    }
+  }
+  // console.log(evenRow);
+  // return;
+
+  //create a final loop to be able to switch the rows
   var output = '';
-  // use the array to create columns
-  for (var i = 1; i <= x; i++) {
-    //even columns
-    if (i % 2 === 0 && i < x) {
+  var count = 0;
+  while (count < x) {
+    if (count % 2 === 0 && count < x) {
       output += evenRow + '\n';
-      //odd columns
-    } else if (i % 2 !== 0 && i < x) {
+    } else if (count % 2 !== 0 && count < x) {
       output += oddRow + '\n';
-    } else if (i % 2 === 0 && i === x) {
+    } else if (count % 2 === 0 && count === x) {
       output += evenRow;
-    } else if (i % 2 !== 0 && i === x) {
+    } else if (count % 2 !== 0 && count === x) {
       output += oddRow;
     }
+    count++;
   }
   console.log(output);
 }
