@@ -182,9 +182,11 @@ _.indexOf = function(array, value) {
 */
 
 _.contains = function(array, value) {
+    var hasValue = false;
     for (var i = 0; i < array.length; i++) {
-        (array[i] === value) ? true : false;
+       (array[i] === value ? hasValue = true : hasValue);
     }
+    return hasValue;
 }
 
 /** _.each
@@ -254,7 +256,7 @@ _.unique = function(array) {
 _.filter = function(array, func) {
     var output = [];
     for (let i = 0; i < array.length; i++) {
-        if (func(array[i]) === true) {
+        if (func(array[i], i, array)) {
             output.push(array[i]);
         }
     }
@@ -274,6 +276,15 @@ _.filter = function(array, func) {
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+_.reject = function(array, func) {
+    var falsyArray = [];
+    for (let i = 0; i < array.length; i++) {
+       if(!func(array[i], i, array)) {
+        falsyArray.push(array[i]);
+       }
+    }
+    return falsyArray;
+}
 
 /** _.partition
 * Arguments:
@@ -294,6 +305,21 @@ _.filter = function(array, func) {
 }
 */
 
+_.partition = function(array, func) {
+    var truthyArray = [];
+    var falsyArray = [];
+    var output = [];
+    for (let i = 0; i < array.length; i++) {
+        if (func(array[i])) {
+            truthyArray.push(array[i]);
+        } else if (!func(array[i])) {
+            falsyArray.push(array[i]);
+        }
+    }
+    output.push(truthyArray, falsyArray);
+    return output;
+}
+
 
 /** _.map
 * Arguments:
@@ -311,6 +337,20 @@ _.filter = function(array, func) {
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
+_.map = function(collection, func) {
+    var output = [];
+    // if collection is an array
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++){
+            output.push(func(collection[i], i, collection));
+        }
+    } else { //else it's an object
+        for (let key in collection) {
+            output.push(func(collection[key], key, collection));
+        }
+    }
+    return output;
+};
 
 /** _.pluck
 * Arguments:
@@ -323,6 +363,13 @@ _.filter = function(array, func) {
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 
+_.pluck = function(array, property) {
+    var output = [];
+// loop into an array of objects
+    for(let i = 0; i < array.length; i++) {
+        object = array[i];
+    }
+}
 
 /** _.every
 * Arguments:
