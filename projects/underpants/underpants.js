@@ -22,7 +22,7 @@ var _ = {}; // _ => underscore object
 */
 _.identity = function(value) {
     return value;
-}
+};
 
 /** _.typeOf
 * Arguments:
@@ -43,9 +43,31 @@ _.identity = function(value) {
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
-// _.typeof = function(value) {
+_.typeOf = function(value) {
+    var answer = typeof value;
     
-// }
+    if (answer === 'object' && value instanceof Date != true && value !== null) {
+        if (Array.isArray(value) === true) {
+            return 'array';
+        } else {
+            return 'object';
+        }
+     } else if (value === null) {
+        return 'null';
+    } else if (answer === 'string') {
+        return 'string';
+    } else if (answer === 'number') {
+        return 'number';
+    } else if (answer === 'boolean') {
+        return 'boolean';
+    } else if (answer === 'function') {
+        return 'function';
+    } else if (value instanceof Date === true) {
+        return 'date';
+    }
+
+    return answer;
+};
 
 /** _.first
 * Arguments:
@@ -65,6 +87,24 @@ _.identity = function(value) {
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
+_.first = function(array, number) {
+
+    var output = [];
+
+    if (!Array.isArray(array)) {
+        return [];
+    } else if (!number || number === NaN) {
+        return array[0];
+    } else if (number > array.length) {
+        return array;
+    }else {
+        for (let i = 0; i < number; i++) {
+            output.push(array[i]);
+        }
+        return output;
+    }
+}
+
 
 /** _.last
 * Arguments:
@@ -83,6 +123,21 @@ _.identity = function(value) {
 *   _.last(["a", "b", "c"], 1) -> "c"
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
+_.last = function(array, number) {
+    var output = [];
+    if (!Array.isArray(array)) {
+        return [];
+    } else if (!number || number === NaN) {
+        return array[array.length - 1];
+    } else if (number > array.length) {
+        return array;
+    } else {
+        for (let i = array.length - number; i < array.length; i++) {
+            output.push(array[i]);
+        }
+        return output;
+    }
+}
 
 
 /** _.indexOf
@@ -102,22 +157,12 @@ _.identity = function(value) {
 */
 
 _.indexOf = function(array, value) {
-    var output = [];
     for (var i = 0; i < array.length; i++) {
         if (array[i] === value) {
-            output.push(i);
-        } else if (!Array.isArray(array)) {
-            return -1;
-        } else if(array[i] !== value) {
-            return -1;
+            return i;
         }
     }
-    
-    if (output.length > 1) {
-        return output.join(',');
-    } else {
-        return output.join();
-    }
+    return -1;
 }
 
 
@@ -138,8 +183,7 @@ _.indexOf = function(array, value) {
 
 _.contains = function(array, value) {
     for (var i = 0; i < array.length; i++) {
-        array[i] === value ? true 
-        : !value ? false 
+        (array[i] === value) ? true : false;
     }
 }
 
@@ -182,6 +226,15 @@ _.each = function(collection, func) {
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
+_.unique = function(array) {
+    var output = [];
+    for (var i = 0; i < array.length; i++) {
+        if (!output.includes(array[i])) {
+            output.push(array[i]);
+        }
+    }
+    return output;
+}
 
 /** _.filter
 * Arguments:
@@ -198,7 +251,15 @@ _.each = function(collection, func) {
 * Extra Credit:
 *   use _.each in your implementation
 */
-
+_.filter = function(array, func) {
+    var output = [];
+    for (let i = 0; i < array.length; i++) {
+        if (func(array[i]) === true) {
+            output.push(array[i]);
+        }
+    }
+    return output;
+}
 
 /** _.reject
 * Arguments:
@@ -284,6 +345,40 @@ _.each = function(collection, func) {
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+_.every = function(collection, func) {
+    
+    //determine if collection is an array
+    if (Array.isArray(collection)) {
+        //determine if function was not provided
+         if (!func) {
+            for (let i = 0; i < collection.length; i++){
+                //determine if the current item is TRUTHY
+                if (!collection[i]){
+                    return false;
+                }
+
+            }
+         } else { //else it was
+            for (let i = 0; i < collection.length; i++) {
+                // determine if the result of invoking func on the current items is true
+                if (func(collection[i]) === false) {
+                    return false;
+                }
+            }
+         }
+
+    } else { // else it's an object
+        //determine if function was not provided
+        if (!func) {
+
+        } else { //else it was
+
+        }
+        //else it was
+    }
+   
+    return true; 
+}
 
 /** _.some
 * Arguments:
