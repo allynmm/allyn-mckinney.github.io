@@ -54,8 +54,62 @@ module.exports.typeOf = typeOf;
 
 // first documentation
 /**
- * first: 
+ * first: Designed to loop through the <array> and return the first <number> elements passed as arguments in 
+ * an array or the single element if the <number> is only 1. If no number is passed, it returns the first 
+ * element of the array. If no array is passed, it returns an empty array.
+ * 
+ * @param {Array}: the array to loop through
+ * @param {Number}: determines how many elements to return
+ * 
+ * @returns {Array}: array of first <number> of elements in the <array>
  */
+
+function first(array, number) {
+    var output = [];
+
+    if (!Array.isArray(array)) {
+        return [];
+    } else if (!number || number === NaN) {
+        return array[0];
+    } else if (number > array.length) {
+        return array;
+    }else {
+        for (let i = 0; i < number; i++) {
+            output.push(array[i]);
+        }
+        return output;
+    }
+}
+module.exports.first = first;
+
+//last documentation
+/**
+ * last: Designed to loop through the given array and return the last <number> elements passed as arguments in 
+ * an array or the single element if the <number> is only 1. If no number is passed, it returns the lasst 
+ * element of the array. If no array is passed, it returns an empty array.
+ * 
+ * @param {Array}: the array to loop though
+ * @param {Number}: determines how many elements to return
+ * 
+ * @returns {Array}: array of last <number> of elements in an array
+ */
+
+function last(array, number) {
+    var output = [];
+    if (!Array.isArray(array)) {
+        return [];
+    } else if (!number || number === NaN) {
+        return array[array.length - 1];
+    } else if (number > array.length) {
+        return array;
+    } else {
+        for (let i = array.length - number; i < array.length; i++) {
+            output.push(array[i]);
+        }
+        return output;
+    }
+}
+module.exports.last = last;
 
 // each documentation
 /**

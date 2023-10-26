@@ -364,11 +364,9 @@ _.map = function(collection, func) {
 */
 
 _.pluck = function(array, property) {
-    var output = [];
-// loop into an array of objects
-    for(let i = 0; i < array.length; i++) {
-        object = array[i];
-    }
+    return _.map(array, function(object){
+        return object[property];
+    });
 }
 
 /** _.every
@@ -403,7 +401,6 @@ _.every = function(collection, func) {
                 if (!collection[i]){
                     return false;
                 }
-
             }
          } else { //else it was
             for (let i = 0; i < collection.length; i++) {
@@ -413,7 +410,6 @@ _.every = function(collection, func) {
                 }
             }
          }
-
     } else { // else it's an object
         //determine if function was not provided
         if (!func) {
@@ -423,7 +419,6 @@ _.every = function(collection, func) {
         }
         //else it was
     }
-   
     return true; 
 }
 
@@ -448,6 +443,26 @@ _.every = function(collection, func) {
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+_.some = function(collection, func) {
+    var booFlagVal = false;
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+            if (func(collection[i], i, collection)) {
+                booFlagVal = true;
+            } else if (!func || array[i]) {
+                booFlagVal = true;
+            }
+        }
+    } else { // else it's an object
+        for (let key in collection) {
+           if (func(collection[key], key, collection)) {
+            booFlagVal = true;
+           } else if (!func || collection[key]) {
+            booFlagVal = true;
+           }
+        }
+    }
+}
 
 /** _.reduce
 * Arguments:
@@ -467,7 +482,19 @@ _.every = function(collection, func) {
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
-
+_.reduce = function(array, func, seed) {
+    // for (let i = 0; i < array.length; i++) {
+    //     if (!seed) {
+    //         func(array[0], i)
+    //     } else if (i = 0) {
+    //         func(seed, array[i], i)
+    //     } else if (i !== array.length - 1) {
+    //         func(func(array[i - 1], array[i], i))
+    //     } else if (i === array.length - 1) {
+    //         return func(func(array[i - 1], array[i], i))
+    //     }
+    // }
+}
 
 /** _.extend
 * Arguments:
