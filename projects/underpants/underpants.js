@@ -449,7 +449,7 @@ _.some = function(collection, func) {
         for (let i = 0; i < collection.length; i++) {
             if (func(collection[i], i, collection)) {
                 booFlagVal = true;
-            } else if (!func || array[i]) {
+            } else if (!func || collection[i]) {
                 booFlagVal = true;
             }
         }
@@ -483,6 +483,21 @@ _.some = function(collection, func) {
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 _.reduce = function(array, func, seed) {
+    let result;
+    //determine if the seed value doesn't exist
+    if (seed === undefined){
+        result = array[0]; // first item in an array is assigned to result
+        for (let i = 1; i < array.length; i++) {
+            result = func(result, array[i], i); // what is going on here?
+        }
+    }else{ //else it does
+        result = seed; // result = 0
+        for (let i =0; i < array.length; i++) {
+            result = func(result, array[i], i); // what is going on here?
+            // result is being reassigned the RESULT og invoking the callback function
+        }
+    }
+    return result;
     // for (let i = 0; i < array.length; i++) {
     //     if (!seed) {
     //         func(array[0], i)
@@ -510,7 +525,10 @@ _.reduce = function(array, func, seed) {
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
-
+_.extend = function(object1, object2, ...objects){
+    var output = Object.assign(object1, object2,...objects);
+    return output;
+}
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
