@@ -447,21 +447,22 @@ _.some = function(collection, func) {
     var booFlagVal = false;
     if (Array.isArray(collection)) {
         for (let i = 0; i < collection.length; i++) {
-            if (func(collection[i], i, collection)) {
+            if (func(collection[i], i, collection) === true) {
                 booFlagVal = true;
-            } else if (!func || collection[i]) {
+            } else if (func === undefined && collection[i]) {
                 booFlagVal = true;
             }
         }
     } else { // else it's an object
         for (let key in collection) {
-           if (func(collection[key], key, collection)) {
+           if (func(collection[key], key, collection) === true) {
             booFlagVal = true;
-           } else if (!func || collection[key]) {
+           } else if (func === undefined && collection[key]) {
             booFlagVal = true;
            }
         }
     }
+    return booFlagVal;
 }
 
 /** _.reduce
@@ -498,17 +499,6 @@ _.reduce = function(array, func, seed) {
         }
     }
     return result;
-    // for (let i = 0; i < array.length; i++) {
-    //     if (!seed) {
-    //         func(array[0], i)
-    //     } else if (i = 0) {
-    //         func(seed, array[i], i)
-    //     } else if (i !== array.length - 1) {
-    //         func(func(array[i - 1], array[i], i))
-    //     } else if (i === array.length - 1) {
-    //         return func(func(array[i - 1], array[i], i))
-    //     }
-    // }
 }
 
 /** _.extend

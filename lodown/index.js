@@ -111,6 +111,43 @@ function last(array, number) {
 }
 module.exports.last = last;
 
+// indexOf documentation
+/**
+ * indexOf: Designed to return the index of the first occurrance of the passed value in the array
+ * 
+ * @param {Array}: The array we're iterating through
+ * @param {Any value}: The value we're searching/testing for in the array
+ * 
+ * @returns {Number}: The index of which the value first occurs in the array
+ */
+function indexOf(array, value){
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] === value) {
+            return i;
+        }
+    }
+    return -1;
+}
+module.exports.indexOf = indexOf;
+
+//contains documentation
+/**
+ * contains: Designed to test if the passed value is contained in the passed array
+ * 
+ * @param {Array}: The array to test for the value
+ * @param {Any value}: The value we're searching/testing for in the array
+ * 
+ * @returns {Boolean}: Returns a boolean value depending on if the value is in the array or not
+ */
+function contains(array, value){
+    var hasValue = false;
+    for (var i = 0; i < array.length; i++) {
+       (array[i] === value ? hasValue = true : hasValue);
+    }
+    return hasValue;
+}
+module.exports.contains = contains;
+
 // each documentation
 /**
  * each: Designed to loop over a collection, Array or Object, and applies the 
@@ -119,6 +156,7 @@ module.exports.last = last;
  * @param {Array or Object} collection: The collection over which to iterate.
  * @param {Function} action: The Function to be applied to each value in the 
  * collection
+ * 
  */
 function each(collection, action) {
     if(Array.isArray(collection)) {
@@ -131,19 +169,141 @@ function each(collection, action) {
         }
     }
 }
+module.exports.each = each;
 
+//unique documentation
 /**
- * _.each = function(collection, func) {
-    //if collection is an array
-    if(Array.isArray(collection)) {
-        for (let i = 0; i < collection.length; i++){
-            func(collection[i], i, collection); //invoking the function on each element in the array
-        }
-    } else { //else its an object
-        for (let key in collection) {
-            func(collection[key], key, collection); // invoking function on each value in the array
+ * unique: Designed to create a new array with all duplicates removed from the given array.
+ * 
+ * @param {Array}: The array in which to iterate through and remove any duplicates
+ * 
+ * @returns {Array}: Returns a new array with only unique elements from the passed array
+ */
+function unique(array) {
+    var output = [];
+    for (var i = 0; i < array.length; i++) {
+        if (!output.includes(array[i])) {
+            output.push(array[i]);
         }
     }
+    return output;
 }
+module.exports.unique = unique;
+
+// filter documentation
+/**
+ * filter: Designed to return a new array of data based on the result of the passed function.
+ * 
+ * @param {Array}: The array to interate through
+ * @param {Function}: The function to test each iteration
+ * 
+ * @returns {Array}: A new array containing only the elements from the result of testing each
+ * element of the passed array.
  */
-module.exports.each = each;
+function filter(array, func) {
+    var output = [];
+    for (let i = 0; i < array.length; i++) {
+        if (func(array[i], i, array)) {
+            output.push(array[i]);
+        }
+    }
+    return output;
+}
+module.exports.filter = filter;
+
+// reject documentation
+/**
+ * reject: Designed to return an array of each element that returned falsy as a result of calling
+ * the passed function.
+ * 
+ * @param {Array}: The array to iterate through and test
+ * @param {Function}: The function that is called for each iteration of the passed array
+ * 
+ * @returns {Array}: Returns an array of each element that did not passed the test from the passed
+ * function.
+ */
+function reject(array, func){
+    var falsyArray = [];
+    for (let i = 0; i < array.length; i++) {
+       if(!func(array[i], i, array)) {
+        falsyArray.push(array[i]);
+       }
+    }
+    return falsyArray;
+}
+module.exports.reject = reject;
+
+// partition documentation
+/**
+ * partition: Deisnged to return an array of subarrays; one that contains elements that returned truthy
+ * as a result of the passed function and one of the elements that returned falsy as a result of the of
+ * the passed function.
+ * 
+ * @param {Array}: The array to iterate through and test each element of
+ * @param {Function}: The function to call for each element and return the elements that either passed 
+ * or failed.
+ * 
+ * @returns {Array}: Returns an array of 2 subarrays; the first containing each element that passed as
+ * a result of the passed function and the second of the elements that returned falsy as a result of the
+ * passed function.
+ */
+function partition(array, func){
+    var truthyArray = [];
+    var falsyArray = [];
+    var output = [];
+    for (let i = 0; i < array.length; i++) {
+        if (func(array[i])) {
+            truthyArray.push(array[i]);
+        } else if (!func(array[i])) {
+            falsyArray.push(array[i]);
+        }
+    }
+    output.push(truthyArray, falsyArray);
+    return output;
+}
+
+//map documentation
+/**
+ * map: Designed to return an array of each modified element as a result of calling the passed function
+ * on each iteration of the passed collection
+ * 
+ * @param {Array or Object} collection: The collection to itersate through
+ * @param  {Function}: The function to test each iteration of the passed collection
+ * 
+ * @returns {Array}: Returns an array of the returned value of the fubction called to each iteration of 
+ * the passed collection.
+ */
+function map(collection, func) {
+    var output = [];
+    // if collection is an array
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++){
+            output.push(func(collection[i], i, collection));
+        }
+    } else { //else it's an object
+        for (let key in collection) {
+            output.push(func(collection[key], key, collection));
+        }
+    }
+    return output;
+}
+module.exports.map = map;
+
+// pluck documentation
+/**
+ * pluck: Designed to return an array containing the value of the passed property for every element in
+ * the passed array
+ * 
+ * @param {Array}: An array of objects to iterate through
+ * @param {Any value} propery: The property to return the values of from each iteration of the passed
+ * array of objects
+ * 
+ * @returns (Array): Returns an array containing the value of property for each element in the array
+ * of objects.
+ */
+function pluck(array, property){
+    return _.map(array, function(object){
+        return object[property];
+    });
+}
+module.exports.pluck = pluck;
