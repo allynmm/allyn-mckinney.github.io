@@ -23,7 +23,7 @@ var _ = require('underbar');
  */
 
 var maleCount = function(array) {
-    maleArray = filter(array, function() {
+    maleArray = filter(array, function(male) {
 
     } )
 };
@@ -46,7 +46,8 @@ var youngestCustomer = function(array){
 var averageBalance = function(array) {
     var balanceSum = 0;
     for (let i = 0; i < array.length; i++) {
-        balanceSum += Number(array[i]['balance']);
+        var balanceNum = Number(array[i].balance.replace(/[,$]/g,''));
+        balanceSum += balanceNum;
     }
     var avgBalance = balanceSum / array.length;
     return avgBalance;
@@ -66,20 +67,36 @@ var friendFirstLetterCount = function(array, customer, letter) {
     var friendLetterCount = 0;
     for (let i = 0; i < array.length; i++){
         if (array[i]['name'] === customer) {
-            var customerObject = array[i];
-            for (let x = 0; x < customerObject['friends'].length; x++){
-                if (customerObject['friends'][x]['name'][0].toUpperCase() === letter.toUpperCase()){
-                    friendFirstLetterCount++;
+            for (let x = 0; x < array[i].friends.length; x++){
+                if (array[i].friends[x].name[0].toUpperCase() === letter.toUpperCase()){
+                    friendLetterCount++;
                 }
             }
         }
     }
-    return friendFirstLetterCount;
+    return friendLetterCount;
 };
 
-var friendsCount;
+var friendsCount = function(array, name){
+    var output = [];
+    for (let i = 0; i < array.length; i++){
+        if (name !== array[i].name){
+            for (let x = 0; x < array[i].friends.length; x++){
+                if (array[i].friends[x].name === name){
+                    output.push(array[i].name)
+                }
+            }
+        }
+    }
+    return output;
+};
 
-var topThreeTags;
+var topThreeTags = function(array){
+    var output = [];
+    for (let i = 0; i < array.length; i++){
+        let customerTags = array[i].tags;
+    }
+};
 
 var genderCount = function(array){
     var maleCustomer = 0;

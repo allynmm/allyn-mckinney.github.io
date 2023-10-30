@@ -447,17 +447,17 @@ _.some = function(collection, func) {
     var booFlagVal = false;
     if (Array.isArray(collection)) {
         for (let i = 0; i < collection.length; i++) {
-            if (func(collection[i], i, collection) === true) {
+            if (func(collection[i], i, collection)) {
                 booFlagVal = true;
-            } else if (func === undefined && collection[i]) {
+            } else if (func === undefined && Boolean(collection[i])) {
                 booFlagVal = true;
             }
         }
     } else { // else it's an object
         for (let key in collection) {
-           if (func(collection[key], key, collection) === true) {
+           if (func(collection[key], key, collection)) {
             booFlagVal = true;
-           } else if (func === undefined && collection[key]) {
+           } else if (func === undefined && Boolean(collection[key])) {
             booFlagVal = true;
            }
         }
