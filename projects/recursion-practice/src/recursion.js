@@ -18,7 +18,15 @@ var factorial = function(n, product=1) {
 
 // 2. Compute the sum of an array of integers.
 // Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
-var sum = function(array) {
+var sum = function(array, answer=0) {
+  //base
+  if (array.length === 0){
+    return answer
+  }
+
+  //recursion
+  answer += array[0];
+  return sum(array.slice(1), answer);
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
@@ -28,17 +36,62 @@ var arraySum = function(array) {
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  //base
+  if (n === 1){
+    return false;
+  } else if (n === 0) {
+    return true;
+  }
+  //recursion
+  if (n > 0){
+    return isEven(n - 2);
+  } else if (n < 0) {
+    return isEven(n + 2);
+  }
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
-var sumBelow = function(n) {
+var sumBelow = function(n, sum=0) {
+  //base
+  if (n === 0){
+    return sum;
+  }
+  //recursion
+  if (n > 0){
+    sum += n - 1;
+    return sumBelow(n - 1, sum);
+  } else if (n < 0){
+    sum += n + 1;
+    return sumBelow(n + 1, sum);
+  }
+  
 };
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function(x, y) {
+var range = function(x, y, output=[]) {
+  //base
+  //if x is less than y
+  if (x === y - 1) {
+    return output;
+    // if x is greater than y
+  } else if (x === y + 1) {
+    return output;
+  } else if (x === y) {
+    return output;
+  }
+  //recursion
+  //if x is positive and y is positive
+  if (x < y) {
+    output.push(x + 1);
+    return range(x + 1, y, output);
+  } else if (x > y){
+    output.push(x - 1);
+    return range(x - 1, y, output);
+  }
+
 };
 
 // 7. Compute the exponent of a number.
@@ -47,6 +100,17 @@ var range = function(x, y) {
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  //base
+  if (exp === 0) {
+    return 1;
+  } else if (exp === 1) {
+    return base;
+  }
+  //recursion
+  //if exp > 0 => 
+
+  
+
 };
 
 // 8. Determine if a number is a power of two.
