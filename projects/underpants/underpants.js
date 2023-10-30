@@ -444,25 +444,36 @@ _.every = function(collection, func) {
 */
 
 _.some = function(collection, func) {
-    var booFlagVal = false;
     if (Array.isArray(collection)) {
-        for (let i = 0; i < collection.length; i++) {
-            if (func(collection[i], i, collection)) {
-                booFlagVal = true;
-            } else if (func === undefined && Boolean(collection[i])) {
-                booFlagVal = true;
+        if (func === undefined){
+            for (let a = 0; a < collection.length; a++){
+                if (Boolean(collection[a])){
+                    return true;
+                }
+            }
+        } else {
+            for (let b = 0; b < collection.length; b++){
+                if (func(collection[b], b, collection)) {
+                    return true;
+                }
             }
         }
     } else { // else it's an object
-        for (let key in collection) {
-           if (func(collection[key], key, collection)) {
-            booFlagVal = true;
-           } else if (func === undefined && Boolean(collection[key])) {
-            booFlagVal = true;
-           }
+        if (func === undefined){
+            for (let key1 in collection) {
+                if (Boolean(collection[key1])){
+                    return true;
+                }
+            }
+        } else {
+            for (let key2 in collection) {
+                if (func(collection[key2], key2, collection)){
+                    return true;
+                }
+            }
         }
     }
-    return booFlagVal;
+    return false;
 }
 
 /** _.reduce
