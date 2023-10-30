@@ -2,6 +2,7 @@
 
 'use strict';
 
+const { filter, reduce } = require('lodash');
 var customers = require('./data/customers.json');
 var _ = require('underbar');
 
@@ -22,26 +23,87 @@ var _ = require('underbar');
  */
 
 var maleCount = function(array) {
-    
+    maleArray = filter(array, function() {
+
+    } )
 };
 
-var femaleCount;
+var femaleCount = function(array) {
+    // return reduce(array, )
+};
 
-var oldestCustomer;
+var oldestCustomer = function(array) {
+    // var customerAges = [];
+    // for (let i = 0; i < array.length; i++) {
+    //     customerAges.push()
+    // }
+};
 
-var youngestCustomer;
+var youngestCustomer = function(array){
 
-var averageBalance;
+};
 
-var firstLetterCount;
+var averageBalance = function(array) {
+    var balanceSum = 0;
+    for (let i = 0; i < array.length; i++) {
+        balanceSum += Number(array[i]['balance']);
+    }
+    var avgBalance = balanceSum / array.length;
+    return avgBalance;
+};
 
-var friendFirstLetterCount;
+var firstLetterCount = function(array, letter) {
+    var letterCount = 0;
+    for (let i = 0; i < array.length; i++){
+        if (array[i]['name'][0].toUpperCase() === letter.toUpperCase()) {
+            letterCount++;
+        }
+    }
+    return letterCount;
+};
+
+var friendFirstLetterCount = function(array, customer, letter) {
+    var friendLetterCount = 0;
+    for (let i = 0; i < array.length; i++){
+        if (array[i]['name'] === customer) {
+            var customerObject = array[i];
+            for (let x = 0; x < customerObject['friends'].length; x++){
+                if (customerObject['friends'][x]['name'][0].toUpperCase() === letter.toUpperCase()){
+                    friendFirstLetterCount++;
+                }
+            }
+        }
+    }
+    return friendFirstLetterCount;
+};
 
 var friendsCount;
 
 var topThreeTags;
 
-var genderCount;
+var genderCount = function(array){
+    var maleCustomer = 0;
+    var femaleCustomer = 0;
+    var nonbinaryCustomer = 0;
+
+    var customerGenders = {};
+
+    for (let i = 0; i < array.length; i++){
+        if (array[i]['gender'] === 'male'){
+            maleCustomer++;
+        } else if (array[i]['gender'] === 'female'){
+            femaleCustomer++;
+        } else if (array[i]['gender'] === 'non-binary'){
+            nonbinaryCustomer++;
+        }
+    }
+
+    customerGenders.male = maleCustomer;
+    customerGenders.female = femaleCustomer;
+    customerGenders['non-binary'] = nonbinaryCustomer;
+
+    return customerGenders;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
