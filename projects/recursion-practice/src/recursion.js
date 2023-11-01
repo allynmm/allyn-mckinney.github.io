@@ -99,18 +99,20 @@ var range = function(x, y, output=[]) {
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
-var exponent = function(base, exp) {
+var exponent = function(base, exp, n=1, product=1) {
   //base
   if (exp === 0) {
     return 1;
   } else if (exp === 1) {
     return base;
+  } else if (n === exp) {
+    return product;
   }
   //recursion
-  //if exp > 0 => 
-  
-
-  
+   product *= base * 1;
+   n++;
+   
+  return exponent(base, exp, n, product);
 
 };
 
@@ -132,14 +134,24 @@ var powerOfTwo = function(n) {
 };
 
 // 9. Write a function that accepts a string a reverses it.
-var reverse = function(string, output='') {
+var reverse = function(string, rvrs=[]) {
   // base
-  
+  if (string.length === 0) {
+    return rvrs.join('');
+  }
   // recursion
+  rvrs.unshift(string[0]);
+  return reverse(string.slice(1), rvrs);
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  //base
+  if () {
+   
+  }
+  //recursion
+
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -251,7 +263,14 @@ var countOccurrence = function(array, value, count=[]) {
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
-var rMap = function(array, callback) {
+var rMap = function(array, callback, output=[]) {
+  //base
+  if (array.length === 0) {
+    return output;
+  }
+  //recursion
+  output.push(callback(array[0]));
+  return rMap(array.slice(1), callback, output);
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -286,18 +305,46 @@ var fibonacci = function(n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function(n) {
+var nthFibo = function(n, fibonacci) {
+  // base
+  if (n === fibonacci[0]) {
+    return fibonacci[0];
+  }
+  // recursion
+  if (n !== fibonacci[0]){
+    return nthFibo(fibonacci.slice(1));
+  } else if (n < 0) {
+    return null
+  }
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
-var capitalizeWords = function(input) {
+var capitalizeWords = function(input, output=[]) {
+  //base
+  if (input.length === 0){
+    return output;
+  }
+  //recursion
+  output.push(input[0].toUpperCase());
+  return capitalizeWords(input.slice(1), output);
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
-var capitalizeFirst = function(array) {
+var capitalizeFirst = function(array, output=[]) {
+  //base
+  if (array.length === 0){
+    return output;
+  }
+  //recursion
+  var splitString = array[0].split('');
+  splitString.splice(0, 1, splitString[0].toUpperCase());
+  var capFirstWord = splitString.join('');
+  
+  output.push(capFirstWord);
+  return capitalizeFirst(array.slice(1), output);
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -319,7 +366,22 @@ var flatten = function(arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
+var letterTally = function(str, obj={}) {
+//create variable for each unique letter and assign it the value of 1
+// if the letter occurs again, increment the appropriate letter count
+
+  //base
+  if (str.length === 0) {
+    return obj;
+  }
+
+  //recursion
+  if (!obj.hasOwnProperty(str[0])){
+    obj[str[0]] = 1;
+  } else {
+    obj[str[0]] += 1;
+  }
+  return letterTally(str.slice(1), obj);
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -327,7 +389,21 @@ var letterTally = function(str, obj) {
 // elements should not be changed.
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
-var compress = function(list) {
+var compress = function(list, output=[], n=1) {
+  //base
+  if (list.length === 0) {
+    return output;
+  }
+  //recursion
+  if (output.length === 0){
+    output.push(list[0])
+  }
+
+  if(list[n] !== list[n - 1]){
+    output.push(list[n])
+  }
+
+  return compress(list.slice(1), output, n);
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -346,7 +422,18 @@ var minimizeZeroes = function(array) {
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
-var alternateSign = function(array) {
+var alternateSign = function(array, output=[], n=0) {
+  // //base
+  // if (){
+
+  // }
+  // //recursion
+  // if(n % 2 !== 0 && n > 0){
+  //   output.push(array[0])
+  //   n++
+  // } else if (array[0] < 0){
+  //   array[n] = -array[0]
+  // }
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
