@@ -23,24 +23,44 @@ var _ = require('underbar');
  */
 
 var maleCount = function(array) {
-    maleArray = filter(array, function(male) {
-
+    var maleArray = _.filter(array, function(customer) {
+        if (customer.gender === 'male'){
+            return true;
+        }
     } )
+    return maleArray.length;
 };
 
 var femaleCount = function(array) {
-    // return reduce(array, )
+   let females = _.reduce(array, function(acc, curr){
+        if (curr.gender === 'female'){
+            acc.push(curr);
+        }
+        return acc;
+    }, []);
+    return females.length;
 };
 
 var oldestCustomer = function(array) {
-    // var customerAges = [];
-    // for (let i = 0; i < array.length; i++) {
-    //     customerAges.push()
-    // }
+    let oldest = _.reduce(array, function(acc, current){
+        if (acc.age > current.age){
+            return acc;
+        } else if (acc.age < current.age){
+            return current;
+        }
+    })
+    return oldest.name;
 };
 
 var youngestCustomer = function(array){
-
+    let youngest = _.reduce(array, function(acc, current){
+        if (acc.age < current.age){
+            return acc;
+        } else if (acc.age > current.age){
+            return current;
+        }
+    })
+    return youngest.name;
 };
 
 var averageBalance = function(array) {
@@ -95,6 +115,9 @@ var topThreeTags = function(array){
     var output = [];
     for (let i = 0; i < array.length; i++){
         let customerTags = array[i].tags;
+        for (let a = 0; a < customerTags.length; a++){
+            output.push(customerTags[a]);
+        }
     }
 };
 

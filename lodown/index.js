@@ -307,3 +307,30 @@ function pluck(array, property){
     });
 }
 module.exports.pluck = pluck;
+
+//reduce documentation
+/**
+ * reduce: 
+ * 
+ * @param {Array}:
+ * @param {Function}:
+ * @param {Any value} seed:
+ */
+function reduce(array, func, seed){
+    let result;
+    //determine if the seed value doesn't exist
+    if (seed === undefined){
+        result = array[0]; // first item in an array is assigned to result
+        for (let i = 1; i < array.length; i++) {
+            result = func(result, array[i], i); // what is going on here?
+        }
+    }else{ //else it does
+        result = seed; // result = 0
+        for (let i =0; i < array.length; i++) {
+            result = func(result, array[i], i); // what is going on here?
+            // result is being reassigned the RESULT of invoking the callback function
+        }
+    }
+    return result;
+}
+module.exports.reduce = reduce;

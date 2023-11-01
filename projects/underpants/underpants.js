@@ -506,7 +506,7 @@ _.reduce = function(array, func, seed) {
         result = seed; // result = 0
         for (let i =0; i < array.length; i++) {
             result = func(result, array[i], i); // what is going on here?
-            // result is being reassigned the RESULT og invoking the callback function
+            // result is being reassigned the RESULT of invoking the callback function
         }
     }
     return result;
