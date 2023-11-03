@@ -146,12 +146,7 @@ var reverse = function(string, rvrs=[]) {
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
-  //base
-  if () {
-   
-  }
-  //recursion
-
+ 
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -314,8 +309,8 @@ var nthFibo = function(n, fibonacci) {
   if (n !== fibonacci[0]){
     return nthFibo(fibonacci.slice(1));
   } else if (n < 0) {
-    return null
-  }
+    return null;
+  } 
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
@@ -423,23 +418,66 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array, output=[], n=0) {
-  // //base
+  //base
   // if (){
 
   // }
-  // //recursion
-  // if(n % 2 !== 0 && n > 0){
-  //   output.push(array[0])
-  //   n++
-  // } else if (array[0] < 0){
-  //   array[n] = -array[0]
-  // }
+  //recursion
+  if (array[0] > 0) {
+    output.push(array[0])
+  } else if (array[0]) {
+    
+  }
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function(str) {
+var numToText = function(str, output=[]) {
+  // // base
+  // if () {
+
+  // }
+  // // recursion
+
+  // let words = str.split(' ');
+  // if (typeof words[0] === 'number') {
+   
+  //   switch (words[0]) {
+  //     case 1: 
+  //       words[0] = 'one';
+  //       break;
+  //     case 2:
+  //       words[0] = 'two';
+  //       break;
+  //     case 3:
+  //       words[0] = 'three';
+  //       break;
+  //     case 4:
+  //       words[0] = 'four';
+  //       break;
+  //     case 5:
+  //       words[0] = 'five';
+  //       break;
+  //     case 6:
+  //       words[0] = 'six';
+  //       break;
+  //     case 7:
+  //       words[0] = 'seven';
+  //       break;
+  //     case 8:
+  //       words[0] = 'eight';
+  //       break;
+  //     case 9:
+  //       words[0] = 'nine';
+  //       break;
+  //   }
+  //   output.push(words[0]);
+  // } else if (typeof words[0] === 'string') {
+  //   output.push(words[0]);
+  // }
+
+  // return numToText()
 };
 
 // *** EXTRA CREDIT ***

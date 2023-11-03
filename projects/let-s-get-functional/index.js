@@ -34,7 +34,7 @@ var maleCount = function(array) {
 var femaleCount = function(array) {
    let females = _.reduce(array, function(acc, curr){
         if (curr.gender === 'female'){
-            acc.push(curr);
+            acc.push(curr,);
         }
         return acc;
     }, []);
@@ -112,13 +112,34 @@ var friendsCount = function(array, name){
 };
 
 var topThreeTags = function(array){
+
     var output = [];
+    let tagCountObj = {};
     for (let i = 0; i < array.length; i++){
-        let customerTags = array[i].tags;
-        for (let a = 0; a < customerTags.length; a++){
-            output.push(customerTags[a]);
+        let tags = array[i].tags
+        for (let x = 0; x < tags.length; x++) {
+            if (!tagCountObj.hasOwnProperty(tags[x])) {
+                tagCountObj[tags[x]] = 1;
+            } else {
+                tagCountObj[tags[x]]++;
+            }
         }
     }
+
+    let entries = [];
+    for (let key in tagCountObj){
+        entries.push([key, tagCountObj[key]]);
+    }
+
+    entries.sort(function(a, b){
+        return b[1] - a[1];
+    })
+
+    for (let a = 0; a < 3; a++){
+        output.push(entries[a][0]);
+      };
+
+    return output;
 };
 
 var genderCount = function(array){
