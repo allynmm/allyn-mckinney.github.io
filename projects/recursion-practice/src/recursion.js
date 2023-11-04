@@ -419,14 +419,26 @@ var minimizeZeroes = function(array) {
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array, output=[], n=0) {
   //base
-  // if (){
-
-  // }
+  if (array.length === 0){
+    return output;
+  }
   //recursion
-  if (array[0] > 0) {
-    output.push(array[0])
-  } else if (array[0]) {
-    
+  if (array[0] > 0 && n % 2 === 0) {
+    output.push(array[0]);
+    n++;
+    return alternateSign(array.slice(1), output, n);
+  } else if (array[0] < 0 && n % 2 === 0) {
+    output.push(-array[0]);
+    n++;
+    return alternateSign(array.slice(1), output, n);
+  } else if (array[0] > 0 && n % 2 !== 0) {
+    output.push(-array[0]);
+    n++;
+    return alternateSign(array.slice(1), output, n);
+  } else if (array[0] < 0 && n % 2 !== 0) {
+    output.push(array[0]);
+    n++;
+    return alternateSign(array.slice(1), output, n);
   }
 };
 
