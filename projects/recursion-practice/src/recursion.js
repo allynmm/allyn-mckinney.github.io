@@ -146,7 +146,17 @@ var reverse = function(string, rvrs=[]) {
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
- 
+ // base
+ if (string[0] !== string[string.length - 1]) {
+  return false
+ } else if (string.length === 0) {
+  return true
+ }
+
+ // recursion
+  if (string[0] === string[string.length - 1]){
+    return palindrome(string.slice(1, -1))
+  }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -300,17 +310,19 @@ var fibonacci = function(n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function(n, fibonacci) {
+var nthFibo = function(n, fibo=[0, 1]) {
   // base
-  if (n === fibonacci[0]) {
-    return fibonacci[0];
-  }
-  // recursion
-  if (n !== fibonacci[0]){
-    return nthFibo(fibonacci.slice(1));
+  if (fibo[n]) {
+    return fibo[n];
   } else if (n < 0) {
     return null;
-  } 
+  } else if (n === 0){
+    return 0;
+  }
+  // recursion
+    fibo.push(fibo[fibo.length - 1] + fibo[fibo.length - 2]);
+    return nthFibo(n, fibo);
+  
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
@@ -384,7 +396,7 @@ var letterTally = function(str, obj={}) {
 // elements should not be changed.
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
-var compress = function(list, output=[], n=1) {
+var compress = function(list, output=[]) {
   //base
   if (list.length === 0) {
     return output;
@@ -394,11 +406,11 @@ var compress = function(list, output=[], n=1) {
     output.push(list[0])
   }
 
-  if(list[n] !== list[n - 1]){
-    output.push(list[n])
+  if(list[0] !== output[output.length - 1]){
+    output.push(list[0])
   }
 
-  return compress(list.slice(1), output, n);
+  return compress(list.slice(1), output);
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -410,7 +422,26 @@ var augmentElements = function(array, aug) {
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-var minimizeZeroes = function(array) {
+var minimizeZeroes = function(array, output=[], ) {
+  //base
+  if (array.length === 0) {
+    return output;
+  }
+  //recursion
+  if (output.length === 0){
+    output.push(array[0])
+    return minimizeZeroes(array.slice(1), output);
+  }
+
+  if(array[0] === 0 && output[output.length - 1] !== 0){
+    output.push(array[0]);
+  } else if (array[0] === 0 && output[output.length - 1] === 0){
+    return minimizeZeroes(array.slice(1), output);
+  } else if (array[0] !== 0){
+    output.push(array[0]);
+  }
+
+  return minimizeZeroes(array.slice(1), output);
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
@@ -445,51 +476,29 @@ var alternateSign = function(array, output=[], n=0) {
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function(str, output=[]) {
-  // // base
-  // if () {
-
-  // }
-  // // recursion
-
-  // let words = str.split(' ');
-  // if (typeof words[0] === 'number') {
-   
-  //   switch (words[0]) {
-  //     case 1: 
-  //       words[0] = 'one';
-  //       break;
-  //     case 2:
-  //       words[0] = 'two';
-  //       break;
-  //     case 3:
-  //       words[0] = 'three';
-  //       break;
-  //     case 4:
-  //       words[0] = 'four';
-  //       break;
-  //     case 5:
-  //       words[0] = 'five';
-  //       break;
-  //     case 6:
-  //       words[0] = 'six';
-  //       break;
-  //     case 7:
-  //       words[0] = 'seven';
-  //       break;
-  //     case 8:
-  //       words[0] = 'eight';
-  //       break;
-  //     case 9:
-  //       words[0] = 'nine';
-  //       break;
-  //   }
-  //   output.push(words[0]);
-  // } else if (typeof words[0] === 'string') {
-  //   output.push(words[0]);
-  // }
-
-  // return numToText()
+var numToText = function(str, output='') {
+  let obj = {
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine',
+  };
+  // base
+  if (str.length === 0) {
+    return output;
+  }
+  // recursion 
+  if (obj.hasOwnProperty(str[0])){
+    output += obj[str[0]];
+  } else {
+    output += str[0];
+  }
+  return numToText(str.slice(1), output)
 };
 
 // *** EXTRA CREDIT ***
