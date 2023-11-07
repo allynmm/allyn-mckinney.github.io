@@ -7,6 +7,10 @@ function range(start, end, step=1) {
   var count = start;
   if (start === end){
     return arr;
+  } else if (start < end && step < start){
+    return arr;
+  } else if (start > end && step > end){
+    return arr;
   } else if (start > end) {
     // let count = start;
     while (count >= end){
@@ -24,11 +28,7 @@ function range(start, end, step=1) {
   } else if (start > end && step > start) {
     return [];
   }
-  // let count = start;
-  // while (count <= end){
-  //   arr.push(count);
-  //   count++;
-  // }
+  
   return arr;
 }
 
