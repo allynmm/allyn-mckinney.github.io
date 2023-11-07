@@ -2,23 +2,27 @@
 // range ///////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function range(start, end) {
+function range(start, end, step=1) {
   var arr = [];
-
+  var count = start;
   if (start === end){
     return arr;
   } else if (start > end) {
-    let count = start;
+    // let count = start;
     while (count >= end){
       arr.push(count);
-      count--;
+      count-= step;
     }
   } else if (start < end) {
-    let count = start;
+    // let count = start;
     while (count <= end){
       arr.push(count);
-      count++
+      count+= step;
     }
+  } else if (start < end && step < start) {
+    return [];
+  } else if (start > end && step > start) {
+    return [];
   }
   // let count = start;
   // while (count <= end){
@@ -99,19 +103,28 @@ function listToArray(list, arr=[]) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function prepend(element, list) {
-  // call the arrayToList function?
+ var output = {};
+ output.value = element;
+ output.rest = Object.assign(list);
+
+ return output;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // nth /////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function nth(list, number) {
-  // is element refering to an array and the list param is an array?
-    // or is element refering to the value after turning an array to a list?
+function nth(list, n) {
   // base
+  if (n === 0){
+    return list.value;
+  } else if (n < 0) {
+    return undefined;
+  }
 
   // recursion
+
+  return nth(list.rest, n - 1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
