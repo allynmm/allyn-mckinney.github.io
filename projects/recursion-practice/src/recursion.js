@@ -99,21 +99,20 @@ var range = function(x, y, output=[]) {
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
-var exponent = function(base, exp, n=1, product=1) {
+var exponent = function(base, exp, product=1) {
   //base
   if (exp === 0) {
-    return 1;
-  } else if (exp === 1) {
-    return base;
-  } else if (n === exp) {
     return product;
   }
   //recursion
-   product *= base * 1;
-   n++;
-   
-  return exponent(base, exp, n, product);
-
+  if (exp > 0) {
+    product *= base;
+    return exponent(base, exp - 1, product);
+  } else if (exp < 0) {
+    product *= (1 / base);
+    return exponent(base, exp + 1, product);
+  }
+  
 };
 
 // 8. Determine if a number is a power of two.
@@ -146,16 +145,18 @@ var reverse = function(string, rvrs=[]) {
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  let testStr = string.replaceAll(/\s/g, '').toLowerCase();
  // base
- if (string[0] !== string[string.length - 1]) {
-  return false
- } else if (string.length === 0) {
-  return true
+ if (testStr[0] !== testStr[testStr.length - 1]) {
+  return false;
+ } else if (testStr.length === 0) {
+  return true;
  }
 
  // recursion
-  if (string[0] === string[string.length - 1]){
-    return palindrome(string.slice(1, -1))
+  console.log(testStr)
+  if (testStr[0] === testStr[testStr.length - 1]){
+    return palindrome(testStr.slice(1, -1))
   }
 };
 
@@ -170,18 +171,21 @@ var modulo = function(x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-var multiply = function(x, y, z=1, sum=x) {
-  if (z === y){
+var multiply = function(x, y, sum=0) {
+  if (x === 0 || y === 0){
     return sum;
-  } else if (y === 0){
-    return 0
   }
 
-  if (z !== y && y > 0){
-    z++;
+  if ((x > 0 && y > 0) || (x < 0 && y > 0)){
     sum += x;
+    return multiply(x, y - 1, sum);
+  } else if (x < 0 && y < 0){
+    let tempX = -x;
+
+    sum += tempX;
+    return multiply(x, y + 1, sum);
   }
-  return multiply(x, y, z, sum);
+  
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
