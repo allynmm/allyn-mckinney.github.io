@@ -298,7 +298,7 @@ module.exports.map = map;
  * @param {Any value} propery: The property to return the values of from each iteration of the passed
  * array of objects
  * 
- * @returns (Array): Returns an array containing the value of property for each element in the array
+ * @returns {Array}: Returns an array containing the value of property for each element in the array
  * of objects.
  */
 function pluck(array, property){
@@ -308,13 +308,107 @@ function pluck(array, property){
 }
 module.exports.pluck = pluck;
 
+//every documentation
+/**
+ * every: Designed to check if every element in the collection is truthy after being called on the passed
+ * function
+ * 
+ * @param {Array or Object} collection: the collection that we are iterating through and testing
+ * @param {Function}: The function that tests each value/item in the given collection
+ * 
+ * @returns {Boolean}: Returns true if the result of calling the callback function on every item of the
+ * given collection is truthy/true.
+ */
+function every(collection, func){
+     
+    //determine if collection is an array
+    if (Array.isArray(collection)) {
+        //determine if function was not provided
+         if (!func) {
+            for (let i = 0; i < collection.length; i++){
+                //determine if the current item is TRUTHY
+                if (!collection[i]){
+                    return false;
+                }
+            }
+         } else { //else it was
+            for (let i = 0; i < collection.length; i++) {
+                // determine if the result of invoking func on the current items is true
+                if (func(collection[i]) === false) {
+                    return false;
+                }
+            }
+         }
+    } else { // else it's an object
+        //determine if function was not provided
+        if (!func) {
+
+        } else { //else it was
+
+        }
+        //else it was
+    }
+    return true; 
+}
+module.exports.every = every;
+
+//some documentation
+/**
+ * some: Designed to see if the result of invoking the callback function on at least one item in the 
+ * given collection is truthy
+ * 
+ * @param {Array or Object} collection: The collection we are iterating through and calling the
+ * callback function on each value
+ * @param {Function}: The callback function we invoke on each item/value
+ * 
+ * @returns {Boolean}: Returns true if the result of invoking the callback function on at least one 
+ * item of the given collection is true
+ */
+function some (collection, func){
+    if (Array.isArray(collection)) {
+        if (func === undefined){
+            for (let a = 0; a < collection.length; a++){
+                if (Boolean(collection[a])){
+                    return true;
+                }
+            }
+        } else {
+            for (let b = 0; b < collection.length; b++){
+                if (func(collection[b], b, collection)) {
+                    return true;
+                }
+            }
+        }
+    } else { // else it's an object
+        if (func === undefined){
+            for (let key1 in collection) {
+                if (Boolean(collection[key1])){
+                    return true;
+                }
+            }
+        } else {
+            for (let key2 in collection) {
+                if (func(collection[key2], key2, collection)){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+module.exports.some = some;
+
 //reduce documentation
 /**
- * reduce: 
+ * reduce: Designed to return a single value after invoking the callback function on each value
+ * from the given array
  * 
- * @param {Array}:
- * @param {Function}:
- * @param {Any value} seed:
+ * @param {Array}: The array to iterate through and invoke the callback function
+ * @param {Function}: The callback function to call on each element of the array
+ * @param {Any value} seed: Determines what the return value will be if a seed is passed
+ * 
+ * @returns {Any value}: Return value is to be determined on whether a seed is provided. If no seed
+ * is provided, then the return value will be a value from the array
  */
 function reduce(array, func, seed){
     let result;
@@ -334,3 +428,21 @@ function reduce(array, func, seed){
     return result;
 }
 module.exports.reduce = reduce;
+
+//extend documentation
+/**
+ * extend: Takes in at least 2 objects, copies properties from the passed object(s) and pastes into the first
+ * object and returns the updated first object
+ * 
+ * @param {Object} object1: The object to be updated
+ * @param {Object} object2: The object that's values will be copied and added to the first object
+ * @param {Object} ...objects: Any possible additional objects that would be copied and added to the first 
+ * object
+ * 
+ * @returns {Object}: Returns the first object with the values from any other passed object(s) copied into it
+ */
+function extend(object1, object2, ...objects){
+    var output = Object.assign(object1, object2,...objects);
+    return output;
+}
+module.exports.extend = extend;
