@@ -1,4 +1,5 @@
-/** VARIABLES
+/** 
+ * VARIABLES
  * 
  *  0. Variables can point to/hold on to values known as memory in programs. They are seen as labeled buckets that 
  * can contain values of any data types (string, number, boolean, etc.). Since variables do not *contain* values, they
@@ -25,7 +26,14 @@
 // reassignable 
 
 // 4. Let keyword
+// The let keyword can be globally, function, and block scoped.
 
 // 5. Const keyword
+// The const keyword can be either global, block, or function scoped as well but variables declared with const cannot
+// be reassigned
 
 // 6. Hoisting
+// Before any code is executed, functions and variables declared with the var keyword (just the name, not the value) are brought
+// up to the top of the program. This means that if you were to reference the value before passint it a value, you would get 
+// undefined instead of a reference error
+// 
